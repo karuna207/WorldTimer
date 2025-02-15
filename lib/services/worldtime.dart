@@ -27,9 +27,7 @@ class WorldTime{
 
         isDay=(hourValue>=6 && hourValue<18) ? true:false;
 
-
       }
-
 
       time = data['time'];
     }
