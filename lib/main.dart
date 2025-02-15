@@ -6,7 +6,7 @@ import 'package:world_timer/pages/Loading_screen.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute:'/home',
+    initialRoute:'/',
     routes: {
       '/':(context){
         return LoadingScreen();

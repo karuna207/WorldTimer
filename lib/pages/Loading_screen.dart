@@ -1,39 +1,55 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:world_timer/services/worldtime.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
 
+
   @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
+  State<LoadingScreen> createState() => _TimeZoneAppState();
+
+
 }
 
-class _LoadingScreenState extends State<LoadingScreen> {
+class _TimeZoneAppState extends State<LoadingScreen> {
 
-  void getData() async{
-        Response response=await get('https://jsonplaceholder.typicode.com/todos/1' as Uri);
-        Map data=jsonDecode(response.body);
-        if (kDebugMode) {
-          print(data);
-        }
 
+
+  void setupTime() async{
+    WorldTime instance= WorldTime(location: 'Calcutta',flag:'india.png',url:'zone?timeZone=Asia%2FCalcutta');
+    await instance.getTime();
+    Navigator.pushReplacementNamed(context,'/home',arguments: {
+      'location':instance.location,
+      'flag':instance.flag,
+      'time':instance.time,
+    });
   }
-
 
   @override
   void initState(){
     super.initState();
-    getData();
+    setupTime();
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:SafeArea(child: Text("Loading Screen")),
+      backgroundColor: Colors.blue[400],
+      appBar: AppBar(
+        title:Text("WorldClock"),
+        centerTitle: true,
+        backgroundColor: Colors.blue[300],
+      ),
+      body: Center(
+            child: SpinKitPouringHourGlassRefined(
+              color: Colors.white,
+              size: 50.0,
+            ),
+            ),
     );
   }
-
-
 }
