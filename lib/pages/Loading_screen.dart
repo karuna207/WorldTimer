@@ -25,6 +25,7 @@ class _TimeZoneAppState extends State<LoadingScreen> {
       'location':instance.location,
       'flag':instance.flag,
       'time':instance.time,
+      'isDay':instance.isDay,
     });
   }
 

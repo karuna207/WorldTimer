@@ -8,6 +8,7 @@ class WorldTime{
   String? time;
   String? flag;
   String? url;
+  bool? isDay;
 
   WorldTime({this.location,this.flag,this.url});
 
@@ -19,7 +20,16 @@ class WorldTime{
       if (kDebugMode) {
         print(data);
         print(data['time']);
+
+        DateTime timeObj = DateTime.parse("2025-02-15 ${data['time']}"); // Dummy date added
+        int hourValue = timeObj.hour;
+        print(hourValue);
+
+        isDay=(hourValue>=6 && hourValue<18) ? true:false;
+
+
       }
+
 
       time = data['time'];
     }
